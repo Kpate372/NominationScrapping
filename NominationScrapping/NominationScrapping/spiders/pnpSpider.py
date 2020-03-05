@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import datetime
+import NominationScrapping.spiders.emailLogic as el
+
 
 class PnpspiderSpider(scrapy.Spider):
     name = 'pnpSpider'
@@ -10,6 +12,8 @@ class PnpspiderSpider(scrapy.Spider):
     def parse(self, response):
         todayDate = datetime.datetime.now()
         dateString = todayDate.strftime("%B %-d, %Y")
+        data = response.text
         match = data.find(dateString)
         if match > -1:
             print("Found an Update Today!!!!")
+            el.sendEmail()
