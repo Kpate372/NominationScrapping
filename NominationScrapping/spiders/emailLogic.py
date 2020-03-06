@@ -14,7 +14,7 @@ def getPassword():
 
 
 def getRecipients():
-    to = ['harshitpatel24@gmail.com', 'khushalipatel487@gmail.com']
+    to = ['harshitpatel24@gmail.com']
     return to
 
 
