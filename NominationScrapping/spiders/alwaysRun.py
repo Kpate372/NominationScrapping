@@ -1,0 +1,3 @@
+d = {}
+while True:
+    None
