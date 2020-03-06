@@ -8,14 +8,15 @@ def getConnection():
 def addDate(dateString):
     con = getConnection()
     cur = con.cursor()
-    cur.execute("INSERT INTO statusTable (dateString,emailFlag) values (%s,%s)" % (dateString, True))
-    cur.commit()
+    cur.execute("INSERT INTO statusTable (dateString,emailFlag) values ('%s',%s)" % (dateString, True))
+    con.commit()
     cur.close()
+    con.close()
 
 def checkForEmail(dateString):
     con = getConnection()
     cur = con.cursor()
-    cur.execute("SELECT * from statusTable where date like %s" % (dateString,))
+    cur.execute("SELECT * from statusTable where dateString = '%s'" % (dateString,))
     rows = cur.fetchall()
     if len(rows) == 0:
         addDate(dateString)
