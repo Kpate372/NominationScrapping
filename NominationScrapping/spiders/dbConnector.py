@@ -5,6 +5,7 @@ def getConnection():
     con = psycopg2.connect(database="oinp", user="postgres", password="harshit24", host="127.0.0.1", port="5432")
     return con
 
+
 def addDate(dateString, noOfTimes):
     con = getConnection()
     cur = con.cursor()
@@ -12,6 +13,7 @@ def addDate(dateString, noOfTimes):
     con.commit()
     cur.close()
     con.close()
+
 
 def updateDate(dateString, newCount):
     con = getConnection()
@@ -27,8 +29,8 @@ def checkForEmail(dateString, noOfTimes):
     cur = con.cursor()
     cur.execute("SELECT * from statusTable where dateString = '%s'" % (dateString,))
     rows = cur.fetchone()
-    if len(rows) == 0:
-        addDate(dateString, noOfTimes)
+    if rows == None:
+        addDate(dateString, 1)
         con.close()
         return False
     else:
