@@ -11,12 +11,13 @@ class PnpspiderSpider(scrapy.Spider):
 
     def parse(self, response):
         todayDate = datetime.datetime.now()
-        dateString = todayDate.strftime("%B %-d, %Y")
-        #dateString = "March 4, 2020"
+        #dateString = todayDate.strftime("%B %-d, %Y")
+        dateString = "March 6, 2020"
         data = response.text
         match = data.find(dateString)
         if match > -1:
-            if dc.checkForEmail(dateString):
+            noOfTimes = data.count(dateString)/2
+            if dc.checkForEmail(dateString, noOfTimes):
                 print(str(todayDate)+"-----Update is there and email already sent")
             else:
                 el.sendEmail()
