@@ -11,8 +11,8 @@ class PnpspiderSpider(scrapy.Spider):
 
     def parse(self, response):
         todayDate = datetime.datetime.now()
-        #dateString = todayDate.strftime("%B %-d, %Y")
-        dateString = "March 6, 2020"
+        dateString = todayDate.strftime("%B %-d, %Y")
+        #dateString = "March 6, 2020"
         data = response.text
         match = data.find(dateString)
         if match > -1:
